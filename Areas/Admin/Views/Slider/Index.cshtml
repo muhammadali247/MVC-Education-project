@@ -1,0 +1,102 @@
+﻿@using EduHome.Areas.Admin.ViewModels.SliderViewModel;
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@model List<AdminSliderViewModel>
+
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Sliders</h4>
+                    <div class="table-responsive">
+                        <a asp-action="Create" class="btn btn-primary">Create</a>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var sliderViewModel in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <img src="~/assets/img/slider//@sliderViewModel.Image" />
+                                        </td>
+                                        <td>@sliderViewModel.Title</td>
+                                        <td>@Html.Raw(sliderViewModel.Description)</td>
+                                        <td>
+                                            <a class="btn btn-primary" asp-action="Detail" asp-route-id="@sliderViewModel.Id">Detail</a>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-warning" asp-action="Update" asp-route-id="@sliderViewModel.Id">Update</a>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@sliderViewModel.Id">Delete</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                @if (ViewBag.CurrentPage > 1)
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link" aria-label="Previous" asp-action="Index" asp-route-page="1">
+                                            1
+                                        </a>
+                                    </li>
+                                }
+                                <li class="page-item @(ViewBag.CurrentPage <= 1 ? "disabled" : "")">
+                                    <a class="page-link" aria-label="Previous" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage-1)">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+
+
+                                @if (ViewBag.CurrentPage > 1)
+                                {
+                                    @for (int i = ViewBag.CurrentPage - 1; i <= ViewBag.CurrentPage + 1; i++)
+                                    {
+
+                                        <li class="page-item @(ViewBag.CurrentPage == i ? "disabled active" : "" )">
+                                            <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+                                        </li>
+                                        if (ViewBag.TotalPages == i)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                else if (ViewBag.CurrentPage == 1 && ViewBag.TotalPages > 1)
+                                {
+                                    @for (int i = 1; i <= ViewBag.CurrentPage + 2; i++)
+                                    {
+                                        <li class="page-item @(ViewBag.CurrentPage == i ? "disabled" : "")">
+                                            <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+                                        </li>
+                                    }
+                                }
+
+                                <li class="page-item @(ViewBag.CurrentPage >= ViewBag.TotalPages ? "disabled" : "")">
+                                    <a class="page-link" aria-label="Next" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage + 1)">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

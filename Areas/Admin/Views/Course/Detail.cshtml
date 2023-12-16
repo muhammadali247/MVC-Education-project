@@ -1,0 +1,51 @@
+﻿@using EduHome.Areas.Admin.ViewModels.CourseViewModel;
+@{
+    ViewData["Title"] = "Detail";
+}
+
+@model AdminCourseDetailViewModel
+
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-lg-6 grid-margin stretch-card">
+            <div style="border: 1px dashed black; padding: 20px">
+                <div>
+                    <img src="~/assets/img/course//@Model.Image" style="margin-bottom: 10px"></img>
+                </div>
+                <div style="display:flex; align-items: center">
+                    <h4>Name: <span style="font-weight:300; margin-left: 5px">@Model.Name</span></h4>
+                </div>
+                <div style="display:flex; align-items: center">
+                    <h4>Description: <span style="font-weight:300; margin-left: 5px;">@Html.Raw(Model.Description)</span></h4>
+                </div>
+                <div style="display:flex; align-items: center">
+                    <h4>Language: <span style="font-weight:300; margin-left: 5px">@Model.Language</span></h4>
+                </div>
+                <div style="display:flex; align-items: center">
+                    <h4>Students: <span style="font-weight:300; margin-left: 5px">@Model.Students</span></h4>
+                </div>
+                <div style="display:flex; align-items: center">
+                    <h4>Course fee: <span style="font-weight:300; margin-left: 5px">@Model.CourseFee</span></h4>
+                </div>
+                <div style="display:flex; align-items: center">
+                    <h4>Starts: <span style="font-weight:300; margin-left: 5px">@Model.Starts</span></h4>
+                </div>
+                <div style="display:flex; align-items: center">
+                    <h4>Duration: <span style="font-weight:300; margin-left: 5px">@Model.Duration</span></h4>
+                </div>
+                <div style="display:flex; align-items: center">
+                    <h4>Class duration: <span style="font-weight:300; margin-left: 5px">@Model.ClassDuration</span></h4>
+                </div>
+                <div style="display:flex; align-items: center">
+                    <h4>Skill level: <span style="font-weight:300; margin-left: 5px">@Model.SkillLevel</span></h4>
+                </div>
+                <div style="display:flex; align-items: center">
+                    <h4>Assesments: <span style="font-weight:300; margin-left: 5px">@Model.Assesments</span></h4>
+                </div>
+                <div>
+                    <a class="btn btn-primary" asp-action="Index">Go Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

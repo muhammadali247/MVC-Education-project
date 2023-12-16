@@ -1,0 +1,28 @@
+﻿@using EduHome.Areas.Admin.ViewModels.CategoryViewModel;
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+@model CreateCategoryViewModel
+
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Create product</h4>
+                    <p class="card-description">
+                    <form class="forms-sample" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="Name">Name</label>
+                            <input asp-for="Name" class="form-control" placeholder="Name">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary mr-2">Create</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

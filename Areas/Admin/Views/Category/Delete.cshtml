@@ -1,0 +1,25 @@
+﻿@using EduHome.Areas.Admin.ViewModels.CategoryViewModel;
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+@model DeleteCategoryViewModel
+
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-lg-6 grid-margin stretch-card">
+            <div style="border: 1px dashed black; padding: 20px">
+                <div style="display:flex; align-items: center">
+                    <h4>Name: <span style="font-weight:300; margin-left: 5px">@Model.Name</span></h4>
+                </div>
+                <div style="display: flex">
+                    <form method="post">
+                        <button class="btn btn-danger" type="submit">Delete</button>
+                    </form>
+                    <a class="btn btn-primary" asp-action="Index" style="margin-left: 10px">Go Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

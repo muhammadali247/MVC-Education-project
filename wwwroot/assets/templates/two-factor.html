@@ -1,0 +1,21 @@
+mixin getRIcon(name)
+  i(class='fi-rr-' + name)
+  
+.container 
+  .image-wapper(style="background-image: url(~/assets/templates/two-factor.html)")
+    h1 Welcome Back
+  .form-wapper
+    .form-header
+      h2 Two Step Verification
+      p Please confirm access to your account by entering verification code you received.
+    .form-body
+      form
+        .input-wrapper
+          label(for="code") Recovery Code
+          input#code(type="text" name="code")
+
+        button(type="submit") Sign In
+
+    .form-footer
+      p
+        a.form-link(href="[link]")

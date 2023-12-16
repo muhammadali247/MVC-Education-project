@@ -1,0 +1,28 @@
+﻿@using EduHome.Areas.Admin.ViewModels.SliderViewModel;
+
+@{
+    ViewData["Title"] = "Detail";
+}
+
+@model SliderDetailViewModel
+
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-lg-6 grid-margin stretch-card">
+            <div style="border: 1px dashed black; padding: 20px">
+                <div>
+                    <img src="~/assets/img/slider//@Model.Image" style="margin-bottom: 10px; width: 50%"></img>
+                </div>
+                <div style="display:flex; align-items: center">
+                    <h4>Title: <span style="font-weight:300; margin-left: 5px">@Model.Title</span></h4>
+                </div>
+                <div style="display:flex; align-items: center">
+                    <h4>Description: <span style="font-weight:300; margin-left: 5px;">@Html.Raw(Model.Description)</span></h4>
+                </div>
+                <div>
+                    <a class="btn btn-primary" asp-action="Index">Go Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

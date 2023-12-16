@@ -1,0 +1,107 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using EduHome.Models.Identity;
+@*@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+@using EduHome.Utils.Enums;
+
+@{
+    ViewData["Title"] = "ChangeState";
+}
+
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Change user role</h4>
+                    <p class="card-description">
+                        <form class="forms-sample" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="Id">State actions</label>
+                                <button value="@User.Identity.IsAuthenticated"></button>
+                            </div>
+                            <button type="submit" asp-action="ChangeRole" class="btn btn-warning mr-2">Change role</button>
+                        </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+@*@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+@using EduHome.Utils.Enums;
+
+@{
+    ViewData["Title"] = "ChangeState";
+}
+
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Change user state</h4>
+                    <p class="card-description">
+                        <form class="forms-sample" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="Id">User Name: @Model.UserName</label>
+                                <label for="Id" class="ml-3">Current State: @Model.isActive ? "Active" : "Banned"</label>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" name="state" value="false" class="btn btn-danger">Ban</button>
+                                <button type="submit" name="state" value="true" class="btn btn-info">Activate</button>
+                            </div>
+                        </form>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+*@
+
+
+
+
+
+
+
+
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+@using EduHome.Utils.Enums;
+
+@{
+    ViewData["Title"] = "ChangeState";
+    var user = await UserManager.GetUserAsync(User);
+    var isActive = user != null && user.isActive;
+    var userName = user != null ? user.UserName : "Unknown";
+    var currentState = isActive ? "Active" : "Banned";
+}
+
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Change user state</h4>
+                    <p class="card-description">
+                        <form class="forms-sample" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="Id">User Name: @userName</label>
+                                @*<label for="Id" class="ml-3">Current State: @(user.isActive  ? "Active" : "Banned")</label>*@
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" name="state" value="false" class="btn btn-danger @(!user.isActive ? "disabled" : "")">Ban</button>
+                                <button type="submit" name="state" value="true" class="btn btn-info @(user.isActive ? "disabled" : "")">Activate</button>
+                            </div>
+                        </form>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

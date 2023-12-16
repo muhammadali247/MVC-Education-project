@@ -1,0 +1,40 @@
+﻿@using EduHome.Areas.Admin.ViewModels.CourseViewModel;
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+@model DeleteCourseViewModel
+
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-lg-6 grid-margin stretch-card">
+            <div style="border: 1px dashed black; padding: 20px">
+                <div>
+                    <img src="~/assets/img/course//@Model.Image" style="max-width: 25%; margin-bottom: 10px"></img>
+                </div>
+                <div style="display:flex; align-items: center">
+                    <h4>Name: <span style="font-weight:300; margin-left: 5px">@Model.Name</span></h4>
+                </div>
+                <div style="display:flex; align-items: center">
+                    <h4>Description: <span style="font-weight:300; margin-left: 5px">@Html.Raw(Model.Description)</span></h4>
+                </div>
+                <div style="display:flex; align-items: center">
+                    <h4>Language: <span style="font-weight:300; margin-left: 5px">@Model.Language</span></h4>
+                </div>
+                <div style="display:flex; align-items: center">
+                    <h4>Students count: <span style="font-weight:300; margin-left: 5px">@Model.Students</span></h4>
+                </div>
+                <div style="display:flex; align-items: center">
+                    <h4>CourseFee: <span style="font-weight:300; margin-left: 5px">$@Model.CourseFee</span></h4>
+                </div>
+                <div style="display: flex">
+                    <form method="post">
+                        <button class="btn btn-danger" type="submit">Delete</button>
+                    </form>
+                    <a class="btn btn-primary" asp-action="Index" style="margin-left: 10px">Go Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

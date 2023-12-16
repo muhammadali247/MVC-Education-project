@@ -1,0 +1,33 @@
+﻿@using EduHome.Areas.Admin.ViewModels.UserViewModel;
+
+@{
+    ViewData["Title"] = "ChangeRole";
+}
+
+@model ChangeUserRoleViewModel
+
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Change user role</h4>
+                    <p class="card-description">
+                        <form class="forms-sample" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="Id">Roles</label>
+                                <select class="form-control" asp-for="RoleId" asp-items="@ViewBag.Roles" id="RoleId">
+                                    @*@foreach (Category category in ViewBag.Categories)
+                                    {
+                                    <option value="@category.Id">@category.Name</option>
+                                    }*@
+                                </select>
+                            </div>
+                            <button type="submit" asp-action="ChangeRole" class="btn btn-warning mr-2">Change role</button>
+                        </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

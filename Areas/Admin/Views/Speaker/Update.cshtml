@@ -1,0 +1,38 @@
+﻿@using EduHome.Areas.Admin.ViewModels.SpeakerViewModel;
+
+@{
+    ViewData["Title"] = "Update";
+}
+
+@model UpdateSpeakerViewModel
+
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Update product</h4>
+                    <p class="card-description">
+                    <form class="forms-sample" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="Image">Image</label>
+                            <input asp-for="Image" class="form-control" placeholder="Image" accept="image/*">
+                            <span asp-validation-for="Image" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="Name">Name</label>
+                            <input asp-for="Name" class="form-control" placeholder="Name">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="Duty">Duty</label>
+                            <input asp-for="Duty" class="form-control" placeholder="Duty">
+                            <span asp-validation-for="Duty" class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="btn btn-warning mr-2">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

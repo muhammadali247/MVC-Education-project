@@ -1,0 +1,167 @@
+﻿@using EduHome.Areas.Admin.ViewModels.UserViewModel;
+@*@using EduHome.Areas.Admin.ViewModels.UserViewModel;*@
+@using Microsoft.AspNetCore.Identity
+@using EduHome.Models.Identity;
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+@using EduHome.Utils.Enums;
+
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+@model List<AdminUserViewModel>
+
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Users</h4>
+                    <div class="table-responsive">
+                        @*<a asp-action="Create" class="btn btn-primary">Create</a>*@
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>UserName</th>
+                                    <th>Email</th>
+                                    <th>Fullname</th>
+                                    <th style="color:orangered">
+                                        <i class="mdi mdi-settings menu-icon" style="color: orangered"></i>
+                                        Role settings
+                                    </th>
+                                    <th style="color: steelblue">
+                                        <i class="mdi mdi-file-document-box-outline menu-icon" style="color: lightskyblue"></i>
+                                        State settings
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var userViewModel in Model)
+                                {
+                                    var user = await UserManager.FindByNameAsync(userViewModel.UserName);
+                                    if (user != null)
+                                    {
+                                        var userRoles = await UserManager.GetRolesAsync(user);
+                                        <tr>
+                                            <td>
+                                                @if (userRoles.Contains(Roles.Admin.ToString()) || userRoles.Contains(Roles.Moderator.ToString()))
+                                                {
+                                                    <img src="~/adminAssets/images/admin-moder.jpeg" />
+                                                }
+                                                else if (userRoles.Contains(Roles.Member.ToString()))
+                                                {
+                                                    <img src="~/adminAssets/images/guest-user.png" />
+                                                }
+                                            </td>
+                                            <td>@userViewModel.UserName</td>
+                                            <td>@userViewModel.Email</td>
+                                            <td>@userViewModel.Fullname</td>
+                                            <td>
+                                                <a class="btn @(userRoles.Contains(Roles.Admin.ToString()) ? "disabled btn-secondary" : "btn-warning")" asp-action="ChangeRole" asp-route-id="@userViewModel.Id">Change role</a>
+                                            </td>
+                                            <td>
+                                                <a class="btn @(userRoles.Contains(Roles.Admin.ToString()) ? "disabled btn-secondary" : "btn-info")" asp-action="ChangeState" asp-route-id="@userViewModel.Id">Change state</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                @if (ViewBag.CurrentPage > 1)
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link" aria-label="Previous" asp-action="Index" asp-route-page="1">
+                                            1
+                                        </a>
+                                    </li>
+                                }
+                                <li class="page-item @(ViewBag.CurrentPage <= 1 ? "disabled" : "")">
+                                    <a class="page-link" aria-label="Previous" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage-1)">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+
+
+                                @if (ViewBag.CurrentPage > 1)
+                                {
+                                    @for (int i = ViewBag.CurrentPage - 1; i <= ViewBag.CurrentPage + 1; i++)
+                                    {
+
+                                        <li class="page-item @(ViewBag.CurrentPage == i ? "disabled active" : "" )">
+                                            <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+                                        </li>
+                                        if (ViewBag.TotalPages == i)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                else if (ViewBag.CurrentPage == 1 && ViewBag.TotalPages > 1)
+                                {
+                                    @for (int i = 1; i <= ViewBag.CurrentPage + 2; i++)
+                                    {
+                                        <li class="page-item @(ViewBag.CurrentPage == i ? "disabled" : "")">
+                                            <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+                                        </li>
+                                    }
+                                }
+
+                                <li class="page-item @(ViewBag.CurrentPage >= ViewBag.TotalPages ? "disabled" : "")">
+                                    <a class="page-link" aria-label="Next" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage + 1)">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@*@model List<ChangeUserRoleViewModel>
+
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Usres</h4>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Fullname</th>
+                                    <th>Email</th>
+                                    <th>UserName</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var changeUserModel in Model)
+                                {
+                                    <tr>
+                                        <td>@changeUserModel.Fullname</td>
+                                        <td>@changeUserModel.Email</td>
+                                        <td>@changeUserModel.UserName</td>
+                                        <td>
+                                            <a class="btn btn-warning" asp-action="Update" asp-route-id="@changeUserModel.Id">Change Role</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@

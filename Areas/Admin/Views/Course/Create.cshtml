@@ -1,0 +1,100 @@
+﻿@using EduHome.Areas.Admin.ViewModels.CourseViewModel;
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+@model CreateCourseViewModel
+
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Create product</h4>
+                    <p class="card-description">
+                        <form class="forms-sample" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="Image">Image</label>
+                                <input asp-for="Image" class="form-control" placeholder="Image" accept="image/*">
+                                <span asp-validation-for="Image" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="Name">Name</label>
+                                <input asp-for="Name" class="form-control" placeholder="Name">
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="Starts">Starts</label>
+                                <input asp-for="Starts" class="form-control" placeholder="Starts">
+                                <span asp-validation-for="Starts" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="Duration">Duration</label>
+                                <input asp-for="Duration" class="form-control" placeholder="Duration">
+                                <span asp-validation-for="Duration" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="ClassDuration">Class duration</label>
+                                <input asp-for="ClassDuration" class="form-control" placeholder="Class duration">
+                                <span asp-validation-for="ClassDuration" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="SkillLevel">Skill level</label>
+                                <input asp-for="SkillLevel" class="form-control" placeholder="Skill level">
+                                <span asp-validation-for="SkillLevel" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="Language">Language</label>
+                                <input asp-for="Language" class="form-control" placeholder="Language">
+                                <span asp-validation-for="Language" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="Students">Students</label>
+                                <input asp-for="Students" class="form-control" placeholder="Students">
+                                <span asp-validation-for="Students" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="Assesments">Assesments</label>
+                                <input asp-for="Assesments" class="form-control" placeholder="Assesments">
+                                <span asp-validation-for="Assesments" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="CourseFee">Course fee</label>
+                                <input asp-for="CourseFee" class="form-control" placeholder="Course fee">
+                                <span asp-validation-for="CourseFee" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="Description">Description</label>
+                                <textarea id="editor" asp-for="Description" class="form-control" placeholder="Description"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="Categories">Categories</label>
+                                <select class="form-control" asp-for="CategoryId" asp-items="@ViewBag.Categories">
+                                    @*@foreach (Category category in ViewBag.Categories)
+                                    {
+                                        <option value="@category.Id">@category.Name</option>
+                                    }*@
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary mr-2">Create</button>
+                        </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        .then(editor => {
+            console.log(editor);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+</script>
